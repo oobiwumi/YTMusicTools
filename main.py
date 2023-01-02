@@ -1,17 +1,18 @@
 # IMPORTS ######################################################################
 from ytmusicapi import YTMusic
-
+import make_playlist_clean
 
 # main #########################################################################
 def main():
     yt = YTMusic('headers_auth.json')
+    make_playlist_clean.make_clean(yt, "Bumpin'", "BumpinClean")
 
 
 # get_songs_in_playlist_ytm ----------------------------------------------------
 def get_songs_in_playlist_ytm(yt, name):
     all_playlists = yt.get_library_playlists()
     requested_playlist = None
-    for playlist in all_playlists:
+    for playlist in yt.get_library_playlists():
         if playlist["title"] == name:
             requested_playlist = playlist
             break
